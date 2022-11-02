@@ -6,8 +6,9 @@ body{
     font-family: 'Comfortaa', cursive;
 }
 h2{
-    font-size: 45px;
+    font-size: 40px;
 }
+
 .whole-page{
     max-width: 500px;
     display: block;
