@@ -89,15 +89,9 @@ ccc.addEventListener("click", changeToC);
 let key = "c119ffef35b7245a5e03b6e5724ae961";
 function savePosition(position) {
   let lat = position.coords.latitude;
-  console.log(lat);
   let lon = position.coords.longitude;
-  console.log(lon);
   let call = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=metric`;
   console.log(call);
-  //let ffffff = `https://api.openweathermap.org/data/2.5/cityName?lat=${lat}&lon=${lon}&appid=${key}`
-  //console.log(ffffff);
-  //axios.get(ffffff).then(displayCity);
-
   axios.get(call).then(displayWeather);
   axios.get(call).then(displayCity);
 }
@@ -105,6 +99,14 @@ function displayWeather(response) {
   let temperature = Math.round(response.data.main.temp);
   let h1 = document.querySelector("#temperature");
   h1.innerHTML = temperature;
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  console.log(response.data);
+  
+
 }
 function displayCity(response){
   let city = response.data.name;
@@ -116,4 +118,3 @@ function navigate(){
 }
 let current = document.querySelector("#button-addon3");
 current.addEventListener("click", navigate);
-
