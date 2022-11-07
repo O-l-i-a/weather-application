@@ -8,7 +8,14 @@ body {
 h2 {
   font-size: 40px;
 }
-
+.inactive{
+    color: black;
+    text-decoration: none;
+}
+.inactive:hover{
+    color: black;
+    cursor: default;
+}
 .whole-page {
   max-width: 500px;
   display: block;
@@ -38,11 +45,12 @@ h2 {
   display: table-cell;
   vertical-align: middle;
 }
-
+a{
+    text-decoration: none;
+}
 .sun-or-clouds-image {
   display: inline;
-  max-width: 300px;
-  width: auto;
+  width: 100%;
 }
 .centered {
   padding: 0;

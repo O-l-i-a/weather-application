@@ -16,7 +16,7 @@
 		<form id="search">
 		<div class="input-group mb-3 search-field">
 			<input type="text" class="form-control" id = "search-enjine" placeholder="Enter a city name" aria-label="Recipient's username"
-				aria-describedby="searchfield for a city" autocomplete="on" autofocus="on">
+				aria-describedby="searchfield for a city" autocomplete="off" autofocus="on">
 				<input type="submit" class="btn btn-outline-secondary" id="button-addon2" />
 				<input type="submit" value = "Current" class="btn btn-outline-secondary" id="button-addon3" />
 		</form>
@@ -27,7 +27,7 @@
 		<article class = "weather-today">
 			<div class="row">
 				<div class="col-6">
-					<img width = "500px" src="images/sun-with-some-clouds.svg" id = "icon" alt="Sun with some clouds" class="sun-or-clouds-image vertical-centered">
+					<img src="images/sun-with-some-clouds.svg" id = "icon" alt="Sun with some clouds" class="sun-or-clouds-image vertical-centered">
 				</div>
 				<div class="col-6 day centered">
 					<h2 class="day-time vertical-centered" id = "time"> Sunday 15:50</h2>
@@ -35,7 +35,7 @@
 				<div class="col-6 centered">
 					<h2 class="temperatur vertical-centered"> 
 						<span id="temperature">18</span>
-						<span id="celsius"> °C</span>| <span id="farengeit">°F</span>
+						<a href = "#" id="celsius" class = "inactive"> °C</a>| <a href = "#" id="farengeit">°F</a>
 						</h2>
 				</div>
 				<div class="col-6 centered">
