@@ -1,12 +1,9 @@
+
+let key = "c119ffef35b7245a5e03b6e5724ae961";
+let lat = null;
+let lon = null;
 let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thuesday", "Friday", "Saturday"];
-let date = new Date();
-let h2 = document.querySelector("#time");
-let minutes = date.getMinutes();
-if (minutes<10){
-    minutes=`0${minutes}`;
-}
-h2.innerHTML = `${days[date.getDay()]} ${date.getHours()}:${minutes}`;
-document.addEventListener("DOMContentLoaded", navigate);
+
 
 function searching(event){
     event.preventDefault();
@@ -22,11 +19,28 @@ function searching(event){
     let apiKey = "c119ffef35b7245a5e03b6e5724ae961";
     city = city.toLowerCase();
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    let rrr = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;
     axios.get(url).then(displayWeather);
+    axios.get(rrr).then(displayTime);
+
 }
-document.addEventListener("DOMContentLoaded", navigate )
-let search = document.querySelector("#search");
-search.addEventListener("click", searching);
+function displayTime(response){
+  lon = response.data[0].lon;
+  lat = response.data[0].lat;
+  let region = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,daily&appid=${key}`;
+  axios.get(region).then(displayTime2);
+  //let timeThere = `http://worldtimeapi.org/api/timezone/America/Argentina/Salta`
+
+}
+function displayTime2(response){
+  let timezone =response.data.timezone;
+  let timeThere = `http://worldtimeapi.org/api/timezone/${timezone}`;
+  axios.get(timeThere).then(displayTime3);
+}
+function displayTime3(response){
+  console.log(response.data);
+}
+
 
 
 // Convertion from F to C
@@ -48,23 +62,26 @@ function changeToC(event){
     metric.classList.add("inactive");
 }
 
-let imperial = document.querySelector("#farengeit");
-let metric = document.querySelector("#celsius");
-let celsiusDegree = null;
-imperial.addEventListener("click", changeToF);
-metric.addEventListener("click", changeToC);
+
 
 
 //Current Weather
 
 
-let key = "c119ffef35b7245a5e03b6e5724ae961";
+
 function savePosition(position) {
-  let lat = position.coords.latitude;
-  let lon = position.coords.longitude;
+  lat = position.coords.latitude;
+  lon = position.coords.longitude;
   let call = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=metric`;
   axios.get(call).then(displayWeather);
   axios.get(call).then(displayCity);
+  let date = new Date();
+  let h2 = document.querySelector("#time");
+  let minutes = date.getMinutes();
+  if (minutes<10){
+    minutes=`0${minutes}`;
+  }
+  h2.innerHTML = `${days[date.getDay()]} ${date.getHours()}:${minutes}`;
 }
 function displayWeather(response) {
   celsiusDegree = Math.round(response.data.main.temp);
@@ -75,7 +92,12 @@ function displayWeather(response) {
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );  
-
+  let windSpeed = Math.round(response.data.wind.speed);
+  let wind = document.querySelector("#wind");
+  wind.innerHTML = windSpeed;
+  let humidity = Math.round(response.data.main.humidity);
+  humidityInDokument = document.querySelector("#humidity");
+  humidityInDokument.innerHTML = humidity;
 }
 function displayCity(response){
   let city = response.data.name;
@@ -87,3 +109,18 @@ function navigate(){
 }
 let current = document.querySelector("#button-addon3");
 current.addEventListener("click", navigate);
+function displayDay(){
+  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thuesday", "Friday", "Saturday"];
+}
+
+document.addEventListener("DOMContentLoaded", navigate);
+
+let search = document.querySelector("#search");
+search.addEventListener("click", searching);
+
+
+let imperial = document.querySelector("#farengeit");
+let metric = document.querySelector("#celsius");
+let celsiusDegree = null;
+imperial.addEventListener("click", changeToF);
+metric.addEventListener("click", changeToC);
