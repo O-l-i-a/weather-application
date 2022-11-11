@@ -34,7 +34,7 @@ function displayTime(response){
 }
 function displayTime2(response){
   let timezone =response.data.timezone;
-  let timeThere = `http://worldtimeapi.org/api/timezone/${timezone}`;
+  let timeThere = `https://worldtimeapi.org/api/timezone/${timezone}`;
   axios.get(timeThere).then(displayTime3);
 }
 function displayTime3(response){
@@ -94,7 +94,7 @@ function displayWeather(response) {
   let iconElement = document.querySelector("#icon");
   iconElement.setAttribute(
     "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );  
   let windSpeed = Math.round(response.data.wind.speed);
   let wind = document.querySelector("#wind");
