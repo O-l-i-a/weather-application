@@ -38,7 +38,11 @@ function displayTime2(response){
   axios.get(timeThere).then(displayTime3);
 }
 function displayTime3(response){
-  console.log(response.data);
+  let a = response.data.datetime;
+  let minutes = a.substring(14, 16);
+  let hours = a.substring(11, 13);
+  let h2 = document.querySelector("#time");
+  h2.innerHTML = `${days[response.data.day_of_week]} ${hours}:${minutes}`;
 }
 
 
@@ -109,9 +113,7 @@ function navigate(){
 }
 let current = document.querySelector("#button-addon3");
 current.addEventListener("click", navigate);
-function displayDay(){
-  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thuesday", "Friday", "Saturday"];
-}
+
 
 document.addEventListener("DOMContentLoaded", navigate);
 
