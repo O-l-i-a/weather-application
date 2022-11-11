@@ -16,10 +16,9 @@ function searching(event){
     let remainingLetters = city.slice(1);
     city = firstLetterCap + remainingLetters;
     h1.innerHTML = city;
-    let apiKey = "c119ffef35b7245a5e03b6e5724ae961";
-    city = city.toLowerCase();
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-    let rrr = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;
+    let city1 = city.toLowerCase();
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city1}&appid=${key}&units=metric`;
+    let rrr = `https://api.openweathermap.org/geo/1.0/direct?q=${city1}&limit=5&appid=${key}`;
     axios.get(url).then(displayWeather);
     axios.get(rrr).then(displayTime);
 
