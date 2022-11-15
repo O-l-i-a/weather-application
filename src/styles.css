@@ -58,7 +58,7 @@ a{
   text-align: center;
 }
 .image-for-the-next-days {
-  max-width: 100px;
+    max-width: 130%;
 }
 .day-name {
   font-size: 27px;
