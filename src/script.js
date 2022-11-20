@@ -37,7 +37,6 @@ function displayTime2(response){
   axios.get(timeThere).then(displayTime3);
 }
 function displayTime3(response){
-  console.log(response.data);
   let a = response.data.datetime;
   todaysday = response.data.day_of_week;
   let minutes = a.substring(14, 16);
@@ -95,7 +94,6 @@ function repiatble(day, dayTemperature, eveningTemperature, humidity, wind, icon
     return y;
 }
 function displayForecast(response){
-  console.log(response.data);
   let forecastElement = document.querySelector("#forecast");
   let forecast = "";
   let dayTemperature = null;
@@ -192,7 +190,6 @@ function savePosition(position) {
 }
 function displayWeather(response) {
   celsiusDegree = Math.round(response.data.main.temp);
-  console.log(response.data.coord.lat);
   let h1 = document.querySelector("#temperature");
   h1.innerHTML = celsiusDegree;
   let iconElement = document.querySelector("#icon");
