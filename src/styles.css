@@ -6,7 +6,10 @@ body {
   font-family: "Comfortaa", cursive;
 }
 h2 {
-  font-size: 40px;
+  font-size: 35px;
+}
+.vertical-centered-images {
+  margin-top: 10px;
 }
 .inactive{
     color: black;
@@ -45,6 +48,7 @@ h2 {
   display: table-cell;
   vertical-align: middle;
 }
+
 a{
     text-decoration: none;
 }
@@ -61,9 +65,13 @@ a{
     max-width: 130%;
 }
 .day-name {
-  font-size: 27px;
+  font-size: 21px;
   font-weight: bold;
   text-align: center;
+}
+.nameCentered{
+  display: block;
+  margin: auto;
 }
 .next-day {
   border: 3px solid #656565;
@@ -71,10 +79,14 @@ a{
 }
 .preciration-next-day {
   text-align: center;
+  font-size: 74%;
 }
 .temperatur-next-day {
   font-size: 20px;
 }
 .weather-the-next-days {
   margin-bottom: 15px;
+}
+.image-for-next-moon{
+  width: 90%;
 }

@@ -45,7 +45,28 @@ function displayTime3(response){
   let h2 = document.querySelector("#time");
   h2.innerHTML = `${days[response.data.day_of_week]} ${hours}:${minutes}`;
 }
-function repiatble(day, dayTemperature, eveningTemperature, humidity, wind, icon, moon){
+function moon_phase(number){
+  let a = "";
+  if (number === 0 || number === 1){
+    a = `moon_images/new-moon.png`;
+  }else if (number<0.25){
+    a = `moon_images/BIS025.png`;
+  }else if (number===0.25){
+    a = `moon_images/gleich025.png`;
+  }else if (number<0.5){
+    a = `moon_images/bis05.png`;
+  }else if (number===0.5){
+    a = `moon_images/new-moon.png`;
+  }else if (number<0.75){
+    a = `moon_images/new-moon.png`;
+  }else if (number===0.75){
+    a = `moon_images/new-moon.png`;
+  }else if (number< 1){
+    a = `moon_images/bis1.png`;
+  }
+  return a;
+}
+function repiatble(day, dayTemperature, eveningTemperature, humidity, wind, icon, moon, i){
   let y = `		
   <div class="weather-the-next-days" id = "forecast">
 			<div class="row next-day">
@@ -53,9 +74,9 @@ function repiatble(day, dayTemperature, eveningTemperature, humidity, wind, icon
 					<img class = "image-for-the-next-days" src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="Sun with some clouds">
 				</div>
 				<div class="col-2 centered">
-					<span class="temperatur-next-day vertical-centered">${dayTemperature}°C|°F</span>
+					<span class="temperatur-next-day vertical-centered"> <span id = "dayTemperatureForecast${i}">${dayTemperature}</span><span id = "temperatureNextDays">°C</span></span>
 				</div>
-				<div class="col-4 centered">
+				<div class="col-4 nameCentered">
 					<div class="day-name">
 						${day}
 					</div>
@@ -64,10 +85,10 @@ function repiatble(day, dayTemperature, eveningTemperature, humidity, wind, icon
 					</div>
 				</div>
 				<div class="col-2 centered">
-					<span class="temperatur-next-day vertical-centered">${eveningTemperature}°C|°F</span>
+					<span class="temperatur-next-day vertical-centered"><span id = "dayTemperatureForecastlow${i}">${eveningTemperature}</span><span id = "temperatureNextDays">°C</span></span>
 				</div>
 				<div class="col-2">
-					<img src="${moon}" alt="" class="image-for-next-day">
+					<img src="${moon}" alt="" class="image-for-next-moon vertical-centered-images">
 				</div>
 			</div>
 		</div>`;
@@ -92,7 +113,7 @@ function displayForecast(response){
     wind =  Math.round(response.data.daily[i].wind_speed);
     icon = response.data.daily[i].weather[0].icon;
     moon =  moon_phase(response.data.daily[i].moon_phase);
-    forecast += repiatble(days[todaysday+i+1], dayTemperature, eveningTemperature, humidity, wind, icon,moon);
+    forecast += repiatble(days[todaysday+i+1], dayTemperature, eveningTemperature, humidity, wind, icon,moon, i);
     i ++;}
   })
   forecastElement.innerHTML = forecast;
@@ -105,16 +126,47 @@ function changeToF(event){
     event.preventDefault();
     let temp = document.querySelector("#temperature");
     temp.innerHTML= Math.round(celsiusDegree*9/5+32);
+    let i = 0;
+    while (i < 5){
+    let tempForecast =document.querySelector(`#dayTemperatureForecast${i}`);
+    let tempForecast2 = tempForecast.innerHTML;
+    tempForecast.innerHTML = Math.round(Number(tempForecast2)*9/5+32);
+    i++;
+    }
+    i = 0;
+    while (i < 5){
+      let tempForecast =document.querySelector(`#dayTemperatureForecastlow${i}`);
+      let tempForecast2 = tempForecast.innerHTML;
+      tempForecast.innerHTML = Math.round(Number(tempForecast2)*9/5+32);
+      i++;
+    }
     metric.classList.remove("inactive");
     imperial.classList.add("inactive");
-
+    let forecast = document.querySelector("#temperatureNextDays");
+    forecast.innerHTML = "°F";
 }
 function changeToC(event){
     event.preventDefault();
     let temp = document.querySelector("#temperature");
     temp.innerHTML= celsiusDegree;
+    let i = 0;
+    while (i < 5){
+      let tempForecast =document.querySelector(`#dayTemperatureForecast${i}`);
+      let tempForecast2 = tempForecast.innerHTML;
+      tempForecast.innerHTML = Math.round((Number(tempForecast2)-32)*5/9);
+      i++;
+    }
+    i = 0;
+     while (i < 5){
+      let tempForecast =document.querySelector(`#dayTemperatureForecastlow${i}`);
+      let tempForecast2 = tempForecast.innerHTML;
+      tempForecast.innerHTML = Math.round((Number(tempForecast2)-32)*5/9);
+      i++;
+    }
     imperial.classList.remove("inactive");
     metric.classList.add("inactive");
+    let forecast = document.querySelector("#temperatureNextDays");
+    forecast.innerHTML = "°C";
 }
 
 
