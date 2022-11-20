@@ -73,7 +73,7 @@ function repiatble(day, dayTemperature, eveningTemperature, humidity, wind, icon
 					<img class = "image-for-the-next-days" src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="Sun with some clouds">
 				</div>
 				<div class="col-2 centered">
-					<span class="temperatur-next-day vertical-centered"> <span id = "dayTemperatureForecast${i}">${dayTemperature}</span><span id = "temperatureNextDays">°C</span></span>
+					<span class="temperatur-next-day vertical-centered"> <span id = "dayTemperatureForecast${i}">${dayTemperature}</span><span class = "temperatureNextDays" id = "temperatureNextDays${i}">°C</span></span>
 				</div>
 				<div class="col-4 nameCentered">
 					<div class="day-name">
@@ -84,7 +84,7 @@ function repiatble(day, dayTemperature, eveningTemperature, humidity, wind, icon
 					</div>
 				</div>
 				<div class="col-2 centered">
-					<span class="temperatur-next-day vertical-centered"><span id = "dayTemperatureForecastlow${i}">${eveningTemperature}</span><span id = "temperatureNextDays">°C</span></span>
+					<span class="temperatur-next-day vertical-centered"><span id = "dayTemperatureForecastlow${i}">${eveningTemperature}</span><span class = "temperatureNextDays" id = "temperatureNextDayslow${i}">°C</span></span>
 				</div>
 				<div class="col-2">
 					<img src="${moon}" alt="" class="image-for-next-moon vertical-centered-images">
@@ -138,10 +138,21 @@ function changeToF(event){
       tempForecast.innerHTML = Math.round(Number(tempForecast2)*9/5+32);
       i++;
     }
+    i = 0;
+    while (i < 5){
+      let forecast = document.querySelector(`#temperatureNextDays${i}`);
+      forecast.innerHTML = "°F";
+      i++;
+    }
+    i = 0;
+    while (i < 5){
+      let forecast = document.querySelector(`#temperatureNextDayslow${i}`);
+      forecast.innerHTML = "°F";
+      i++;
+    }
     metric.classList.remove("inactive");
     imperial.classList.add("inactive");
-    let forecast = document.querySelector("#temperatureNextDays");
-    forecast.innerHTML = "°F";
+    
 }
 function changeToC(event){
     event.preventDefault();
@@ -159,6 +170,18 @@ function changeToC(event){
       let tempForecast =document.querySelector(`#dayTemperatureForecastlow${i}`);
       let tempForecast2 = tempForecast.innerHTML;
       tempForecast.innerHTML = Math.round((Number(tempForecast2)-32)*5/9);
+      i++;
+    }
+    i = 0;
+    while (i < 5){
+      let forecast = document.querySelector(`#temperatureNextDays${i}`);
+      forecast.innerHTML = "°C";
+      i++;
+    }
+    i = 0;
+    while (i < 5){
+      let forecast = document.querySelector(`#temperatureNextDayslow${i}`);
+      forecast.innerHTML = "°C";
       i++;
     }
     imperial.classList.remove("inactive");
