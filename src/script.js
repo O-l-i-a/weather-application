@@ -5,6 +5,28 @@ let lon = null;
 let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thuesday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thuesday", "Friday", "Saturday"];
 let todaysday = null;
 
+function moon_phase(number){
+  let a = "";
+  if (number === 0 || number === 1){
+    a = `moon_images/new-moon.png`;
+  }else if (number<0.25){
+    a = `moon_images/BIS025.png`;
+  }else if (number===0.25){
+    a = `moon_images/gleich025.png`;
+  }else if (number<0.5){
+    a = `moon_images/bis05.png`;
+  }else if (number===0.5){
+    a = `moon_images/new-moon.png`;
+  }else if (number<0.75){
+    a = `moon_images/new-moon.png`;
+  }else if (number===0.75){
+    a = `moon_images/new-moon.png`;
+  }else if (number< 1){
+    a = `moon_images/bis1.png`;
+  }
+  return a;
+}
+
 function searching(event){
     event.preventDefault();
     let h1 = document.querySelector("h1");
@@ -45,29 +67,29 @@ function displayTime3(response){
   let h2 = document.querySelector("#time");
   h2.innerHTML = `${days[response.data.day_of_week]} ${hours}:${minutes}`;
 }
-function repiatble(day, dayTemperature, eveningTemperature, humidity, wind, icon){
+function repiatble(array){ //day, dayTemperature, eveningTemperature, humidity, wind, icon, moon
   let y = `		
   <div class="weather-the-next-days" id = "forecast">
 			<div class="row next-day">
 				<div class="col-2">
-					<img class = "image-for-the-next-days" src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="Sun with some clouds">
+					<img class = "image-for-next-day" src="https://openweathermap.org/img/wn/${array[5]}@2x.png" alt="Sun with some clouds">
 				</div>
 				<div class="col-2 centered">
-					<span class="temperatur-next-day vertical-centered">${dayTemperature}°C|°F</span>
+					<span class="temperatur-next-day vertical-centered">${array[1]}°C|°F</span>
 				</div>
 				<div class="col-4 centered">
 					<div class="day-name">
-						${day}
+						${array[0]}
 					</div>
 					<div class="preciration-next-day">
-						💧 ${humidity}% 💨 ${wind}km/h
+						💧 ${array[3]}% 💨 ${array[4]}km/h
 					</div>
 				</div>
 				<div class="col-2 centered">
-					<span class="temperatur-next-day vertical-centered">${eveningTemperature}°C|°F</span>
+					<span class="temperatur-next-day vertical-centered">${array[2]}°C|°F</span>
 				</div>
 				<div class="col-2">
-					<img src="images/half-moon-svgrepo-com.svg" alt="" class="image-for-next-day">
+					<img src="${array[6]}" alt="" class="image-for-next-day">
 				</div>
 			</div>
 		</div>`;
@@ -83,6 +105,8 @@ function displayForecast(response){
   let humidity = null;
   let wind = null;
   let icon = null;
+  let moon = null;
+  let array = null;
   days.forEach(function(){
     if(i <5){
     dayTemperature = Math.round(response.data.daily[i].temp.max);
@@ -90,7 +114,10 @@ function displayForecast(response){
     humidity =  Math.round(response.data.daily[i].humidity);
     wind =  Math.round(response.data.daily[i].wind_speed);
     icon = response.data.daily[i].weather[0].icon;
-    forecast += repiatble(days[todaysday+i+1], dayTemperature, eveningTemperature, humidity, wind, icon);
+    moon = response.data.daily[i].moon_phase;
+    array = [days[todaysday+i+1], dayTemperature, eveningTemperature, humidity, wind, icon, moon_phase(moon)];
+    console.log(moon);
+    forecast += repiatble(array);
     i ++;}
   })
   forecastElement.innerHTML = forecast;

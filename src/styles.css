@@ -57,11 +57,11 @@ a{
   display: table;
   text-align: center;
 }
-.image-for-the-next-days {
-    max-width: 130%;
+.image-for-next-day {
+    max-width: 100%;
 }
 .day-name {
-  font-size: 27px;
+  font-size: 10%;
   font-weight: bold;
   text-align: center;
 }
