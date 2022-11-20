@@ -45,7 +45,7 @@ function displayTime3(response){
   let h2 = document.querySelector("#time");
   h2.innerHTML = `${days[response.data.day_of_week]} ${hours}:${minutes}`;
 }
-function repiatble(day, dayTemperature, eveningTemperature, humidity, wind, icon){
+function repiatble(day, dayTemperature, eveningTemperature, humidity, wind, icon, moon){
   let y = `		
   <div class="weather-the-next-days" id = "forecast">
 			<div class="row next-day">
@@ -67,7 +67,7 @@ function repiatble(day, dayTemperature, eveningTemperature, humidity, wind, icon
 					<span class="temperatur-next-day vertical-centered">${eveningTemperature}°C|°F</span>
 				</div>
 				<div class="col-2">
-					<img src="images/half-moon-svgrepo-com.svg" alt="" class="image-for-next-day">
+					<img src="${moon}" alt="" class="image-for-next-day">
 				</div>
 			</div>
 		</div>`;
@@ -83,6 +83,7 @@ function displayForecast(response){
   let humidity = null;
   let wind = null;
   let icon = null;
+  let moon = null;
   days.forEach(function(){
     if(i <5){
     dayTemperature = Math.round(response.data.daily[i].temp.max);
@@ -90,7 +91,8 @@ function displayForecast(response){
     humidity =  Math.round(response.data.daily[i].humidity);
     wind =  Math.round(response.data.daily[i].wind_speed);
     icon = response.data.daily[i].weather[0].icon;
-    forecast += repiatble(days[todaysday+i+1], dayTemperature, eveningTemperature, humidity, wind, icon);
+    moon =  moon_phase(response.data.daily[i].moon_phase);
+    forecast += repiatble(days[todaysday+i+1], dayTemperature, eveningTemperature, humidity, wind, icon,moon);
     i ++;}
   })
   forecastElement.innerHTML = forecast;
