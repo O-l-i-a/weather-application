@@ -6,7 +6,7 @@ body {
   font-family: "Comfortaa", cursive;
 }
 h2 {
-  font-size: 35px;
+  font-size: 48px;
 }
 .vertical-centered-images {
   margin-top: 10px;
@@ -65,7 +65,7 @@ a{
     max-width: 130%;
 }
 .day-name {
-  font-size: 21px;
+  font-size: 23px;
   font-weight: bold;
   text-align: center;
 }
@@ -79,14 +79,41 @@ a{
 }
 .preciration-next-day {
   text-align: center;
-  font-size: 74%;
+  font-size: 14px;
 }
 .temperatur-next-day {
-  font-size: 20px;
+  font-size: 31px;
 }
 .weather-the-next-days {
   margin-bottom: 15px;
 }
 .image-for-next-moon{
   width: 90%;
+}
+@media (max-width: 484px){
+  .preciration-next-day {
+    text-align: center;
+    font-size: 9.3px;
+  }
+  .city-name {
+    font-size: 55px;
+  }
+  .text-in-search{
+    font-size: 5px !important;
+  }
+  h2 {
+    font-size: 33px;
+  }
+  body{
+  background-color: red;
+  }
+  .preciration {
+    font-size: 18px;
+  }
+  .temperatur-next-day {
+    font-size: 19px;
+  }
+  .image-for-the-next-days {
+    max-width: 45px;
+  }
 }
