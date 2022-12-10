@@ -55,11 +55,11 @@ function moon_phase(number){
   }else if (number<0.5){
     a = `moon_images/bis05.png`;
   }else if (number===0.5){
-    a = `moon_images/new-moon.png`;
+    a = `moon_images/gleich05.png`;
   }else if (number<0.75){
-    a = `moon_images/new-moon.png`;
+    a = `moon_images/bis075.png`;
   }else if (number===0.75){
-    a = `moon_images/new-moon.png`;
+    a = `moon_images/gleich075.png`;
   }else if (number< 1){
     a = `moon_images/bis1.png`;
   }
