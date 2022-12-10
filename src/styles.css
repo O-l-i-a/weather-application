@@ -95,11 +95,11 @@ a{
     text-align: center;
     font-size: 9.3px;
   }
-  .day-name {
-    font-size: 15px;
-  }
   .city-name {
-    font-size: 55px;
+    font-size: 61px;
+  }
+  .day-name {
+    font-size: 16px;
   }
   .text-in-search{
     font-size: 5px !important;
